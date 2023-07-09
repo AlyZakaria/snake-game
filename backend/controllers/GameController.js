@@ -35,10 +35,10 @@ router.post("/join", async (req, res) => {
   }
 });
 
-router.get("/getAll", (req, res) => {
-  res.send("not implemented");
-});
-
+router.get('/getAll', async(req, res) => {
+    const games = await Game.findAll();
+    res.json(games)
+})
 module.exports = router;
 
 
