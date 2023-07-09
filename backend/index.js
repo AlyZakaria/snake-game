@@ -14,6 +14,7 @@ app.use('*', checkUser)
 
 
 
+
 db.sequelize.sync().then(() => {
     app.listen(port, () => {
         console.log(`Server is running on port ${port}`)
