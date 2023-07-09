@@ -7,8 +7,10 @@ const authController = require('./controllers/AuthController')
 const { checkUser } = require('./interceptors/Authorize');
 
 app.use(express.json())
-app.use('*', checkUser)
+
 app.use('/auth', authController)
+app.use('*', checkUser)
+
 
 
 db.sequelize.sync().then(() => {
