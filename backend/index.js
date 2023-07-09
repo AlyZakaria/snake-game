@@ -3,18 +3,16 @@ const app = express()
 const port = 3001
 
 const db = require('./models')
-const authController = require('./controllers/AuthController')
-const gameController = require('./controllers/GameController')
-const boardController = require('./controllers/Board')
+const authController = require('./controllers/AuthController');     
+const userGameController = require('./controllers/UserGameController');
 const { checkUser } = require('./interceptors/Authorize');
 
 app.use(express.json())
-app.use(express.static('public'))
-
 app.use('/auth', authController)
-app.use('/game', gameController)
-app.use('/board', boardController)
-//app.use('*', checkUser)
+app.use('/usergame',userGameController);
+app.use('*', checkUser)
+
+
 
 
 db.sequelize.sync().then(() => {

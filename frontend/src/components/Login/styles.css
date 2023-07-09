@@ -1,0 +1,49 @@
+
+.container{
+    display:flex;
+    justify-content: center;
+}
+
+.login{
+    width: 30%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap
+    ;
+    /* align-items: center; */
+}
+.login > div{
+    flex-basis: 100%;
+}
+.login > .input > input{
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px;
+}
+input:focus{
+    outline: none;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+}
+.buttons{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: nowrap;
+    
+}
+.login button{
+    background-color: blue;
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+
+
+}
