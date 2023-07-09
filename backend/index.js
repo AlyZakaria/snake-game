@@ -1,23 +1,22 @@
-const express = require('express')
-const app = express()
-const port = 3001
+const express = require("express");
+const app = express();
+const port = 3001;
 
-const db = require('./models')
-const authController = require('./controllers/AuthController')
-const { checkUser } = require('./interceptors/Authorize');
+const db = require("./models");
+const authController = require("./controllers/AuthController");
+const gameController = require("./controllers/GameController");
 
-app.use(express.json())
+const { checkUser } = require("./interceptors/Authorize");
 
-app.use('/auth', authController)
-app.use('*', checkUser)
+app.use(express.json());
 
+app.use("/auth", authController);
+app.use("/game", gameController);
 
+// app.use("*", checkUser);
 
 db.sequelize.sync().then(() => {
-    app.listen(port, () => {
-        console.log(`Server is running on port ${port}`)
-    })
-})
-
-
-
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+});
