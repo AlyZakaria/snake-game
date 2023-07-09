@@ -5,7 +5,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER ,
             allowNull: false,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true ,
+            defaultValue: 1
         },
         username: {
             type: DataTypes.STRING,
@@ -17,7 +18,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         }
     }, {
-        id: false,
         timestamps: false
     });
     return Users;

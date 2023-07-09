@@ -19,7 +19,7 @@ const signup = async (user) => {
         return user.username;
     }
     catch(err){
-        console.log('err');
+        console.log(err);
         return err;
     }
 }
