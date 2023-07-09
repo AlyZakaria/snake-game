@@ -40,4 +40,11 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.UserGame.belongsTo(db.Users, { foreignKey: 'user_id', onDelete: 'CASCADE' });
+db.UserGame.belongsTo(db.Game, { foreignKey: 'game_id', onDelete: 'CASCADE' });
+
+db.Game.belongsTo(db.Board, {foreignKey: 'board_id'});
+
+db.board_element.belongsTo(db.Board, {foreignKey: 'board_id'});
+
 module.exports = db;

@@ -4,7 +4,8 @@ module.exports = (sequelize, DataTypes) => {
         game_id: {
             type: DataTypes.INTEGER ,
             allowNull: false,
-            primaryKey: true
+            primaryKey: true,
+            autoIncrement: true
         },
         current_user: {
             type: DataTypes.INTEGER ,
@@ -31,7 +32,7 @@ module.exports = (sequelize, DataTypes) => {
         id: false,
         timestamps: false
     });
-    //Game.belongsTo(Board, {foreignKey: 'board_id'});
+    
     return Game;
 }
 

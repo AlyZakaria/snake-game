@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         id: false,
         timestamps: false
     });
+
     return Board;
 }
 

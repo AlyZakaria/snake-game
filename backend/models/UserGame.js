@@ -1,6 +1,3 @@
-
-
-
 module.exports = (sequelize, DataTypes) => {
     const UserGame = sequelize.define("UserGame", {
         user_id: {
@@ -28,8 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         id: false,
         timestamps: false
     });
-    //UserGame.belongsTo(Users, { foreignKey: 'user_id', onDelete: 'CASCADE' });
-    //UserGame.belongsTo(Game, { foreignKey: 'game_id', onDelete: 'CASCADE' });
+    
     return UserGame;
 }
 

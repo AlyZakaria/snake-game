@@ -1,11 +1,11 @@
-
-
 module.exports = (sequelize, DataTypes) => {
     const board_element = sequelize.define("board_element", {
 
         board_element_id: {
             type: DataTypes.INTEGER ,
-            allowNull: false
+            allowNull: false,
+            autoIncrement: true,
+            primaryKey: true
         },
         from: {
             type: DataTypes.INTEGER ,
@@ -27,8 +27,6 @@ module.exports = (sequelize, DataTypes) => {
         id: false,
         timestamps: false
     });
-    
-    
     return board_element;
 }
 
