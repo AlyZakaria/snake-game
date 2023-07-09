@@ -3,19 +3,35 @@ const router = express.Router()
 
 const {UserGame} = require('../models')
 
-const {play} = require('../services/UserGameService');
+const {play,leaveGame, getPosition} = require('../services/UserGameService');
 
-router.post('/play', (req, res) => {
-    let result = play(req.body.room_id);
-    res.json(result);
+router.post('/play', async (req, res) => {
+    try{
+        let result = await play(req.body.room_id);
+        console.log(result);
+        res.json(result);
+    }catch(error){
+        res.send(error.message).status(400);
+    }
+
 })
 
-router.post('/leave', (req, res) => {
-    res.send('not implemented')
+router.post('/leave', async (req, res) => {
+    try{
+    let result = await leaveGame(req.body.user_id, req.body.room_id);
+    res.send("Leave Success");
+    }catch(err){
+    res.send(err.message).status(400);
+    }
 })
 
-router.get('/getPosition', (req, res) => {
-    res.send('not implemented')
+router.get('/positions', async (req, res) => {
+    try{
+        let result = await getPosition(req.query.room_id);
+        res.json(result);
+    }catch(err){
+        res.send(err.message).status(400);
+    }
 })
 
 
