@@ -1,6 +1,27 @@
 const { UserGame } = require("../models");
 const { Game } = require("../models");
 
+
+const create = async(game) => {
+
+    try{
+        const created = await Game.create(game);   
+        const userGame = {};
+        userGame.user_id = game.created_by
+        userGame.game_id = created.game_id
+        userGame.position = 0
+        userGame.order = 1
+        userGame.color = 'red'
+        const addUserGame = await UserGame.create(userGame);
+        return created;
+    }
+    catch(err){
+        console.log(err)
+        return "err";
+    }
+
+}
+
 const join = async (game_id, user_id) => {
   try {
     const initial_position = 1;
@@ -75,3 +96,5 @@ const startGame = async ({ game_id, user_id, colors }) => {
 };
 
 module.exports.join = join;
+module.exports.create = create
+

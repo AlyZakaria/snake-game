@@ -1,7 +1,7 @@
-const express = require("express");
-const { Users } = require("../models");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const {Users} = require('../models')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 
 expiration = 24 * 60 * 60;
 const createToken = (id) => {
