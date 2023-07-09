@@ -2,29 +2,12 @@ const jwt = require('jsonwebtoken');
 const {Users} = require('../models')
 
 
-const requireAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
 
-  // check json web token exists & is verified
-  if (token) {
-    jwt.verify(token, 'somesecret', (err, decodedToken) => {
-      if (err) {
-        console.log(err.message);
-      } else {
-        console.log(decodedToken);
-        req.auth = false;
-        next();
-      }
-    });
-  } else {
-    req.auth = true;
-    next()
-  }
-};
-
-// check current user
 const checkUser = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const cookies = req.cookies;
+  if (cookies){
+    const token = req.cookies.jwt;
+  console.log(token)
   if (token) {
     jwt.verify(token, 'somesecret', async (err, decodedToken) => {
       if (err) {
@@ -38,9 +21,15 @@ const checkUser = (req, res, next) => {
     });
   } else {
     res.locals.user = null;
-    next();
+    res.status(401).json("please log in")
   }
+  }
+  else{
+    res.locals.user = null;
+    res.status(401).json("please log in")
+  }
+  
 };
 
 
-module.exports = { requireAuth, checkUser };
+module.exports = { checkUser };

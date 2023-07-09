@@ -11,12 +11,20 @@ router.post('/signup', async (req, res) => {
 })
 
 router.post('/signin', async (req, res) => {
-    const response = await signin(req.body)
-    res.json(response)
+    console.log(req.body)
+    const response = await signin(req.body.username, req.body.password);
+    if (response === "Wrong password" || response === "Error Finding User"){
+        res.status(400).json({message: response})
+    }
+    else{
+        res.cookie('jwt', response, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 });
+        res.status(200).json({ token: response });
+    }   
 })
 
 router.get('/signout', (req, res) => {
-    res.send('not implemented')
+    res.cookie('jwt', '', { maxAge: 1 });
+    res.status(200).json({message: "logged out"})
 })
 
 module.exports = router;
