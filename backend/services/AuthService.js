@@ -8,7 +8,7 @@ const signup = async (user) => {
         const salt = await bcrypt.genSalt();
         console.log(salt)
         user.password = await bcrypt.hash(user.password, salt);
-        const created = await Users.create(user);
+        const created = await Users.create( );
         console.log(created);
         return user.username;
     }
