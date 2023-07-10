@@ -8,6 +8,7 @@ const authController = require('./controllers/AuthController');
 const userGameController = require('./controllers/UserGameController');
 const gameController = require('./controllers/GameController');
 const Board = require('./controllers/Board');
+
 const { checkUser } = require('./interceptors/Authorize');
 const { exec } = require('child_process');
 
