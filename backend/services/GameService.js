@@ -24,7 +24,7 @@ const create = async(game) => {
 
 const join = async (game_id, user_id) => {
   try {
-    const initial_position = 1;
+    const initial_position = 0;
     colors = [
       "Red",
       "Blue",
@@ -54,6 +54,11 @@ const join = async (game_id, user_id) => {
       });
       msg = "the player joined the game";
     } else if (status === "start") {
+      const createUserGame = await UserGame.create({
+        game_id,
+        user_id,
+        position: initial_position,
+      });
       await startGame({ game_id, user_id, colors });
       msg = "start the game";
     } else if (status === "full") {
@@ -72,7 +77,7 @@ const checkStatus = async ({ count, game_id }) => {
   console.log(game);
   if (game.game_cap === count) {
     return "full";
-  } else if (game.game_cap === count - 1) {
+  } else if (game.game_cap - 1 === count) {
     return "start";
   } else {
     return "pending";
@@ -90,8 +95,8 @@ const startGame = async ({ game_id, user_id, colors }) => {
       { where: { user_id: users[i].user_id } }
     );
   }
-  await Game.update({ status: "running" }, { where: { game_id } });
-
+  await Game.update({ status: "running", last_play: new Date() }, { where: { game_id } });
+  
   return;
 };
 

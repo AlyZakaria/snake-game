@@ -2,11 +2,12 @@ const express = require("express");
 const router = express.Router();
 
 const { Users } = require("../models");
-const { signup, signin, signout } = require("../services/AuthService");
+const { signup, signin, createToken } = require("../services/AuthService");
 
 router.post("/signup", async (req, res) => {
   const response = await signup(req.body);
-  res.json(response);
+  const token = createToken(response)
+  res.json({token: token});
 });
 
 router.post("/signin", async (req, res) => {
@@ -19,7 +20,7 @@ router.post("/signin", async (req, res) => {
       httpOnly: true,
       maxAge: 24 * 60 * 60 * 1000,
     });
-    res.status(200).json({ token: response });
+    res.status(200).json({ response });
   }
 });
 
