@@ -20,7 +20,7 @@ const play = async (room_id) => {
         : (result[0].order + 1) % (result[0].game_cap + 1);
     let newPosition =
       Number(result[0].position) + diceVal > 100
-        ? 100
+        ? Number(result[0].position)
         : Number(result[0].position) + diceVal;
 
     // before update position, check if there is any user at the new position

@@ -6,6 +6,7 @@ const port = 3001;
 const db = require('./models')
 const authController = require('./controllers/AuthController');     
 const userGameController = require('./controllers/UserGameController');
+const gameController = require('./controllers/GameController');
 const { checkUser } = require('./interceptors/Authorize');
 
 app.use(express.json())

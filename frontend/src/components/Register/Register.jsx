@@ -1,24 +1,24 @@
 import logo from "../../snake-and-ladders.png";
-import "./styles.css";
+import "../Login/styles.css";
 import { useNavigate } from "react-router-dom";
-import useLogin from "../../shared/useLogin";
 import { useState } from "react";
+import useRegister from "../../shared/useRegister";
 
-let username = "";
-let password = "";
 
-function Login() {
+function Register() {
+  let username = "";
+  let password = "";
   let navigate = useNavigate();
-  let [loginStatus , setLoginStatus] = useState(false); 
-  if(loginStatus){
+  let [register , setRegister] = useState(false); 
+  if(register){
     username = document.getElementById("username").value;
     password = document.getElementById("password").value;
   }
-  useLogin(loginStatus, setLoginStatus,{ username, password });
 
+  useRegister(register, setRegister,{ username, password });
 
-  const goToRegister = () => {
-    navigate("/register");
+  const goToLogin = () => {
+    navigate("/login");
   };
   return (
     <div className="container">
@@ -26,7 +26,7 @@ function Login() {
         <div className="col-12 d-flex justify-content-center">
           <img src={logo} width="300" height="300" />
         </div>
-        <h2>Login</h2>
+        <h2>Register</h2>
         <div className="col-12 input">
           <input id ="username" type="text" placeholder="Username" />
         </div>
@@ -35,18 +35,15 @@ function Login() {
         </div>
         <div className="row d-flex justify-content-center">
           <div className="col-md-1 col-12">
-            <button onClick = {() => setLoginStatus(true)} >Login</button>
+            <button  onClick={goToLogin} >Login</button>
           </div>
           <div className = "col-md-1 col-12">
-            <button  onClick={goToRegister}>Register</button>
+            <button  onClick = {() => setRegister(true)} >Register</button>
           </div>
         </div>
       </div>
-      <p id = "loginMessage"></p>
+      <p id = "registerMessage"></p>
     </div>
   );
 }
-
-export default Login;
-
-
+export default Register;
