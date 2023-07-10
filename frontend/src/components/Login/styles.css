@@ -1,0 +1,58 @@
+
+
+.login{
+    width: 30%;
+    height: 70vh;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap
+    ;
+    /* align-items: center; */
+}
+.login > div{
+    flex-basis: 100%;
+}
+
+.input {
+    /* margin: 20px; */
+    margin-top: 15px !important;
+    display: flex;
+    justify-content: center;
+
+}
+.input > input {
+    width: 300px;
+    height: 30px;
+    border-radius: 5px;
+    padding: 7px;
+}
+input:focus{
+    outline: none;
+}
+.logo{
+    display: flex;
+    justify-content: center;
+}
+h2{
+    color: white !important;
+    text-align: center;
+}
+button{
+    background-color: blue;
+    display: inline-block;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px !important;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-top: 15px !important;
+
+}
+
+#loginMessage,
+#registerMessage{
+    color: red;
+    text-align: center;
+    margin-top: 15px !important;
+}
