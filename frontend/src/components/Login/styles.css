@@ -35,6 +35,7 @@ input:focus{
 }
 h2{
     color: white !important;
+    text-align: center;
 }
 button{
     background-color: blue;
@@ -52,4 +53,6 @@ button{
 #loginMessage,
 #registerMessage{
     color: red;
+    text-align: center;
+    margin-top: 15px !important;
 }

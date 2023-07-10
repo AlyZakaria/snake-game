@@ -34,10 +34,10 @@ function Register() {
           <input id = "password" type="password" placeholder="Password" />
         </div>
         <div className="row d-flex justify-content-center">
-          <div className="col-md-3 col-12">
+          <div className="col-md-1 col-12">
             <button  onClick={goToLogin} >Login</button>
           </div>
-          <div className = "col-md-3 col-12">
+          <div className = "col-md-1 col-12">
             <button  onClick = {() => setRegister(true)} >Register</button>
           </div>
         </div>
