@@ -1,3 +1,92 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-[2em] font-bold;
+  }
+  h2 {
+    @apply text-[1.5em] font-bold;
+  }
+  h3 {
+    @apply text-[1.17em] font-bold;
+  }
+
+  h4 {
+    @apply text-[1em] font-bold;
+  }
+  h5 {
+    @apply text-[0.83em] font-bold;
+  }
+  h6 {
+    @apply text-[0.67em] font-bold;
+  }
+}
+
+.dice {
+  background-color: #998d8d;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  cursor: pointer;
+  transition: transform 1s;
+}
+
+.dice.rolling {
+  animation: spin 1s infinite;
+}
+
+.dice:hover {
+  transform: scale(1.1);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.dot {
+  background-color: #333;
+  border-radius: 50%;
+}
+
+.dot-center {
+  grid-row: 2 / span 1;
+  grid-column: 2 / span 1;
+}
+
+.dot-top-left {
+  grid-row: 1 / span 1;
+  grid-column: 1 / span 1;
+}
+
+.dot-top-right {
+  grid-row: 1 / span 1;
+  grid-column: 3 / span 1;
+}
+
+.dot-middle-left {
+  grid-row: 2 / span 1;
+  grid-column: 1 / span 1;
+}
+
+.dot-middle-right {
+  grid-row: 2 / span 1;
+  grid-column: 3 / span 1;
+}
+
+.dot-bottom-left {
+  grid-row: 3 / span 1;
+  grid-column: 1 / span 1;
+}
+
+.dot-bottom-right {
+  grid-row: 3 / span 1;
+  grid-column: 3 / span 1;
+}
