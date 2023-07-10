@@ -62,7 +62,7 @@ const Tabs = ({ color }) => {
                                     </div>
                                 </div>
                                 <div className={openTab === 2 ? "block" : "hidden"} id="link2">
-                                    <div className="Card w-full justify-content-center">
+                                    <div className="Card w-full" style={{position: 'relative'}}>
                                         <Hosting />
                                     </div>
                                 </div>
@@ -75,12 +75,13 @@ const Tabs = ({ color }) => {
     );
 };
 
-export default function TabsRender() {
-
+export default class TabsRender  {
+render(){
     return (
         <>
 
             <Tabs color="green" />;
         </>
     );
+}
 }

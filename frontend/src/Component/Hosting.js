@@ -5,7 +5,7 @@ class Hosting extends Component {
         return (
             <>
             <div class="w-full max-w-xs items-center justify-center">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 container ">
+                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 ">
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="Number">
                             Number of Players
@@ -14,10 +14,9 @@ class Hosting extends Component {
                     </div>
                     <div class="mb-4">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="Type">Board types</label>
-                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                            <option selected>Choose a board type</option>
-                            <option value="US">Type 1</option>
-                            <option value="CA">Type 2</option>
+                        <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500" placeholder='chosoe one '>
+                            <option value="type1">Type 1</option>
+                            <option value="type2">Type 2</option>
 
                         </select>
                     </div>
