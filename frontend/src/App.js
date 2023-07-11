@@ -4,18 +4,18 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
-
+// import Wating from "./Component/Waiting";
 
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <Router> 
         <Routes>
           <Route path="/login" element={<Login/>} />
           <Route path="/register" element={<Register/>} />
           <Route path="/" element={<Login/>} />
-        </Routes>
+        </Routes> 
       </Router>
     </div>
   );

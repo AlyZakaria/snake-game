@@ -75,13 +75,10 @@ const Tabs = ({ color }) => {
     );
 };
 
-export default class TabsRender  {
-render(){
+export default function TabsRender()  {
     return (
         <>
-
             <Tabs color="green" />;
         </>
     );
-}
 }
