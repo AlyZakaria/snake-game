@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3001;
+const cors = require('cors');
 
 
 const db = require('./models')
@@ -20,6 +21,7 @@ seedProcess.on('exit', (code, signal) => {
     console.error(`Seed failed with code ${code} and signal ${signal}`);
   }
 });
+app.use(cors())
 app.use(express.json())
 app.use('/auth', authController)
 app.use('*', checkUser);
