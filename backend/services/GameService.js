@@ -111,7 +111,16 @@ const getPlayers = async(game_id) => {
   return users;
 }
 
+const getAll = async() => {
+  let games = await db.sequelize.query(
+    `SELECT u.username, g.game_cap, g.game_id FROM users as u, games as g WHERE u.user_id = g.created_by`,
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
+  return games;
+}
+
 module.exports.join = join;
 module.exports.create = create;
 module.exports.getPlayers = getPlayers;
+module.exports.getAll = getAll;
 
