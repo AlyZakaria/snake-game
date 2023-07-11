@@ -21,8 +21,8 @@ function Hosting() {
                     </label>
                     <select id="Types" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 ">
                         <option selected>Choose a board type</option>
-                        <option value="US">Type 1</option>
-                        <option value="CA">Type 2</option>
+                        <option value="type1">Type 1</option>
+                        <option value="type2">Type 2</option>
 
                     </select>
                 </div>
