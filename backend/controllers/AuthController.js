@@ -6,8 +6,13 @@ const { signup, signin, createToken } = require("../services/AuthService");
 
 router.post("/signup", async (req, res) => {
   const response = await signup(req.body);
-  const token = createToken(response)
-  res.json({token: token});
+  if (response === "Error, username already exists"){
+    res.status(406).json({error: response});
+  }
+  else{
+    const token = createToken(response.user_id);
+    res.json({token: token, username: response.username});
+  }
 });
 
 router.post("/signin", async (req, res) => {

@@ -4,7 +4,7 @@ const router = express.Router();
 const {get_user_id} = require('../interceptors/Authorize')
 const { Game } = require("../models");
 const { userGame } = require("../models");
-const {getAll, create, join} = require('../services/GameService')
+const {getPlayers, create, join} = require('../services/GameService')
 
 
 router.post('/create', async(req, res) => {
@@ -41,6 +41,18 @@ router.post("/join", async (req, res) => {
 router.get('/getAll', async(req, res) => {
     const games = await Game.findAll({where: {status: 'pending'}});
     res.json(games)
+})
+
+
+router.get('/getPlayers', async(req, res) => {
+  const game_id = req.body.game_id;
+  try{
+    const users = await getPlayers(game_id);
+    res.status(200).json(users)
+  }
+  catch(err){
+    res.status(400).json({msg: 'error'})
+  }
 })
 module.exports = router;
 

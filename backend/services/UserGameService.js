@@ -70,7 +70,7 @@ const play = async (room_id) => {
       {last_play: new Date()},
       {where: {game_id: room_id}}
     )
-    timeChekcer(room_id)
+    timeChekcer(room_id, play)
     return { diceVal, newPosition, newCurrentUser };
   } catch (err) {
     return err;
