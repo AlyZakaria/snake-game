@@ -5,12 +5,14 @@ const Dice = ({ diceValue, onDiceRoll }) => {
   const [rolling, setRolling] = useState(false);
 
   const rollDice = () => {
-    setRolling(true);
-    setTimeout(() => {
-      const newValue = Math.floor(Math.random() * 6) + 1;
-      onDiceRoll(newValue);
-      setRolling(false);
-    }, 1000);
+    if (!rolling) {
+      setRolling(true);
+      setTimeout(() => {
+        const newValue = Math.floor(Math.random() * 6) + 1;
+        onDiceRoll(newValue);
+        setRolling(false);
+      }, 1000);
+    }
   };
 
   const renderDiceDots = () => {

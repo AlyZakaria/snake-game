@@ -29,24 +29,11 @@ const Player = ({ color, left, bottom }) => {
     );
     context.fillStyle = color; // Adjust fill color as desired
     context.fill();
-
-    // Apply blur effect inside the circle
-    // context.globalCompositeOperation = "destination-in";
-    // context.filter = "blur(8px)";
-    // context.fillRect(
-    //   centerX - radius,
-    //   centerY - radius,
-    //   radius * 2,
-    //   radius * 2
-    // );
   }, []);
 
   const canvasStyles = {
-    // position: "absolute",
-    // bottom: `${bottom}%`,
-    // left: `${left}%`,
-    // height: "100%",
-    width: "100%",
+    position: "absolute",
+    width: "6rem",
   };
 
   return <canvas ref={canvasRef} style={canvasStyles} />;

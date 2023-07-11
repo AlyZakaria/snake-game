@@ -1,8 +1,12 @@
 import React from "react";
 import template_1 from "../assets/templates/1.jpg";
+import normal from "../assets/boradMaps/normal";
 import Player from "./Player";
 
 function Board({ position, color }) {
+  //to DO: make many orders like snake order and normal etc
+  const gridToBoardIndex = normal;
+
   return (
     <div className="relative">
       <img src={template_1} alt="Background" className="w-full h-auto" />
@@ -10,10 +14,13 @@ function Board({ position, color }) {
         {Array.from({ length: 100 }).map((_, index) => (
           <div
             key={index}
-            className=" relative flex justify-center items-center"
+            className=" relative flex justify-center items-center "
           >
-            {console.log(index)}
-            {position === 100 - 1 - index ? <Player color={color} /> : ""}
+            {position === gridToBoardIndex[index + 1] ? (
+              <Player color={color} />
+            ) : (
+              ""
+            )}
           </div>
         ))}
       </div>
