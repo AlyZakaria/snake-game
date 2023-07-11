@@ -1,27 +1,30 @@
 
 const express = require("express");
 const router = express.Router();
-
+const {get_user_id} = require('../interceptors/Authorize')
 const { Game } = require("../models");
 const { userGame } = require("../models");
-const {getAll, create, join} = require('../services/GameService')
+const {getPlayers, create, join, getAll} = require('../services/GameService')
 
 
 router.post('/create', async(req, res) => {
-    const game = req.body
+    const id = res.locals.id
+    console.log(`id = ${id}`)
+    let game = req.body
+    game.created_by = id
+    game.current_user = id
     const created = await create(game);
     if (created == 'err'){
-        res.status(400).json({message: created})
+      res.status(400).json({message: created})
     }
     else{
-        res.status(200).json({id: created.game_id});
+      res.status(200).json({id: created.game_id});
     }
-    
 })
 
 router.post("/join", async (req, res) => {
   try {
-    const response = await join(req.body.game_id, req.body.user_id);
+    const response = await join(req.body.game_id, res.locals.id);
     if (response.error) {
       return res.status(500).json(response);
     }
@@ -36,8 +39,20 @@ router.post("/join", async (req, res) => {
 });
 
 router.get('/getAll', async(req, res) => {
-    const games = await Game.findAll();
+    const games = await getAll();
     res.json(games)
+})
+
+
+router.get('/getPlayers', async(req, res) => {
+  const game_id = req.body.game_id;
+  try{
+    const users = await getPlayers(game_id);
+    res.status(200).json(users)
+  }
+  catch(err){
+    res.status(400).json({msg: 'error'})
+  }
 })
 module.exports = router;
 

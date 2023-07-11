@@ -3,8 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 
-expiration = 24 * 60 * 60;
+
 const createToken = (id) => {
+  expiration = 24 * 60 * 60;
   return jwt.sign({ id }, "somesecret", {
     expiresIn: expiration,
   });
@@ -17,12 +18,12 @@ const signup = async (user) => {
     user.password = await bcrypt.hash(user.password, salt);
 
     const created = await Users.create(user);
-    console.log(created);
-
-    return user.username;
+    const ret = {}
+    ret.username = user.username;
+    ret.user_id = user.user_id;
+    return ret;
   } catch (err) {
-    console.log("err");
-    return err;
+    return "Error, username already exists";
   }
 };
 
@@ -32,7 +33,7 @@ const signin = async (username, password) => {
     const success = await bcrypt.compare(password, user.password);
     if (success) {
       const token = createToken(user.user_id);
-      return token;
+      return {token: token, username: user.username};
     } else {
       return "Wrong password";
     }
@@ -44,3 +45,4 @@ const signin = async (username, password) => {
 
 module.exports.signup = signup;
 module.exports.signin = signin;
+module.exports.createToken = createToken

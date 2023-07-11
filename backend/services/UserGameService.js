@@ -1,6 +1,9 @@
 const { userGame, Game } = require("../models");
 
+const socket = require('./socket')
+const timeChekcer = require('../public/TimeChecker')
 const db = require("../models");
+
 
 const play = async (room_id) => {
   try {
@@ -9,7 +12,7 @@ const play = async (room_id) => {
     // console.log(diceVal);
     // need to get the current turn & the position and the order of the current user
     let result = await db.sequelize.query(
-      `SELECT u.position, u.order , g.current_user, g.game_cap FROM usergames as u, games as g WHERE g.game_id = ${room_id} AND g.game_id = u.game_id and g.current_user = u.user_id`,
+      `SELECT u.position, u.order , g.current_user, g.game_cap, g.board_id FROM usergames as u, games as g WHERE g.game_id = ${room_id} AND g.game_id = u.game_id and g.current_user = u.user_id`,
       { type: db.sequelize.QueryTypes.SELECT }
     );
 
@@ -22,14 +25,25 @@ const play = async (room_id) => {
       Number(result[0].position) + diceVal > 100
         ? Number(result[0].position)
         : Number(result[0].position) + diceVal;
-
+    
+    let newPos = newPosition;
+    console.log(result)
+    let special_element = false
+    let element = await db.sequelize.query(`SELECT e.from, e.to FROM board_elements as e where board_id = ${result[0].board_id}`);
+    for (let i=0; i<element[0].length; i++){
+      if (element[0][i].from === newPosition){
+        newPosition = element[0][i].to
+        special_element = true
+        break
+      }
+    }
     // before update position, check if there is any user at the new position
     let noUser = await EmptyIndex(newPosition, room_id);
     if (!noUser) {
       // if there is, update the position of the user at the new position to 0
       console.log("not empty");
       await db.sequelize.query(
-        `update usergames set usergames.position = '0' where usergames.game_id = ${room_id} and usergames.position = '${newPosition}'`,
+        `update usergames set usergames.position = 0 where usergames.game_id = ${room_id} and usergames.position = '${newPosition}'`,
         { type: db.sequelize.QueryTypes.UPDATE }
       );
     }
@@ -51,11 +65,18 @@ const play = async (room_id) => {
 
     let newCurrentUser = result2[0].current_user;
     // update position
+    socket.emit(`${room_id}`, {diceVal, newPosition, newCurrentUser}, "message")
+    await Game.update(
+      {last_play: new Date()},
+      {where: {game_id: room_id}}
+    )
+    timeChekcer(room_id, play)
     return { diceVal, newPosition, newCurrentUser };
   } catch (err) {
     return err;
   }
 };
+
 const leaveGame = async (user_id, room_id) => {
   try {
     let result = await db.sequelize.query(
@@ -98,8 +119,15 @@ const EmptyIndex = async (position, room_id) => {
     });
 };
 
+const get_url = async (room_id) => {
+  const board_id = await db.sequelize.query(`select board_id from games where game_id = ${room_id}`, {type: db.sequelize.QueryTypes.SELECT})
+  console.log(board_id[0].board_id)
+  return db.sequelize.query(`select boards.style from boards where boards.board_id = ${board_id[0].board_id}`)
+}
+
 module.exports = {
   play,
   leaveGame,
   getPosition,
+  get_url
 };
