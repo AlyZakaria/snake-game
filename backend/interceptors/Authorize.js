@@ -4,32 +4,19 @@ const {Users} = require('../models')
 
 
 const checkUser = (req, res, next) => {
-  const cookies = req.cookies;
-  if (cookies){
-    const token = req.cookies.jwt;
-  console.log(token)
+  const token = req.headers.cookies;
   if (token) {
     jwt.verify(token, 'somesecret', async (err, decodedToken) => {
       if (err) {
-        res.locals.user = null;
-        next();
+        res.status(401).json("please log in")
       } else {
-        let user = await User.findByPk(decodedToken.id);
-        res.locals.user = user;
+        res.locals.id = decodedToken.id
         next();
       }
     });
   } else {
-    res.locals.user = null;
-    res.status(401).json("please log in")
-  }
-  }
-  else{
-    res.locals.user = null;
-    res.status(401).json("please log in")
-  }
-  
+      res.status(401).json("please log in")
+    }
 };
-
 
 module.exports = { checkUser };

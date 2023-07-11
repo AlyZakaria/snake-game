@@ -1,0 +1,390 @@
+{
+	"info": {
+		"_postman_id": "c0aa085d-bb4b-4cb8-98e1-9a567ecb5e5c",
+		"name": "snake game",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18205780",
+		"_collection_link": "https://galactic-crater-393139.postman.co/workspace/snake~23a22a75-e58c-4dcc-abb3-ed1289e9efdc/collection/18205780-c0aa085d-bb4b-4cb8-98e1-9a567ecb5e5c?action=share&creator=18205780&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"pass\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/auth/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"132\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"game_cap\":3,\r\n    \"board_id\":1   \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/game/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"game",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "join game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiaWF0IjoxNjg4OTk1NzEyLCJleHAiOjE2ODkwODIxMTJ9.ORidunsFgZ-1Uq1mUCGnk7CbgOtzCqADM2qW6LIDOcE",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"game_id\":1}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/game/join",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"game",
+						"join"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all games",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/game/getAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"game",
+						"getAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "play",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"room_id\": 200\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/usergame/play",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"usergame",
+						"play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get position",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"room_id\": 200\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/usergame/positions?room_id=200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"usergame",
+						"positions"
+					],
+					"query": [
+						{
+							"key": "room_id",
+							"value": "200"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "leave game",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \r\n    \"room_id\": 16\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3001/game/leave",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"game",
+						"leave"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all boards",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/board/get_all_boards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"get_all_boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get image",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2Mzc0LCJleHAiOjE2ODkwNzI3NzR9.rxv8MLf3YsR8Gad3oeYrt6CTyEd_4pNnbL_xmOLQE54",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/board/get_image/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"board",
+						"get_image",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "signout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "cookies",
+						"value": "sInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjg4OTg2MDY5LCJleHAiOjE2ODkwNzI0Njl9.ui81HsgMpX1ZFMuY4DLOKqdrJCTLXIqCxO2tOFtzoLo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3001/auth/signout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"auth",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get board",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3001/usergame/get_board",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"usergame",
+						"get_board"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

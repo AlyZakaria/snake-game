@@ -1,9 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-const {UserGame} = require('../models')
-
-const {play,leaveGame, getPosition} = require('../services/UserGameService');
+const {play,leaveGame, getPosition, get_url} = require('../services/UserGameService');
 
 router.post('/play', async (req, res) => {
     try{
@@ -18,7 +16,7 @@ router.post('/play', async (req, res) => {
 
 router.post('/leave', async (req, res) => {
     try{
-    let result = await leaveGame(req.body.user_id, req.body.room_id);
+    let result = await leaveGame(res.locals.id, req.body.room_id);
     res.send("Leave Success");
     }catch(err){
     res.send(err.message).status(400);
@@ -34,6 +32,16 @@ router.get('/positions', async (req, res) => {
     }
 })
 
+router.get('/get_board', async(req, res) => {
+    try{
+        let result = await getPosition(req.query.room_id);
+        let url = await get_url(req.query.room_id);
+        console.log(url[0][0])
+        res.json({positions: result, url: url[0][0]});
+    }catch(err){
+        res.send(err.message).status(400);
+    }
+})
 
 module.exports = router;
 
