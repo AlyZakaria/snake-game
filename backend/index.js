@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const port = 3001;
+const cors = require("cors");
 
 
 const db = require('./models')
@@ -8,6 +9,13 @@ const authController = require('./controllers/AuthController');
 const userGameController = require('./controllers/UserGameController');
 const gameController = require('./controllers/GameController');
 const Board = require('./controllers/Board');
+
+
+
+// Or, allow all origins with specific methods and headers
+app.use(cors({
+  origin: "*",
+}));
 
 const { checkUser } = require('./interceptors/Authorize');
 const { exec } = require('child_process');
