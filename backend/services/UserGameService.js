@@ -88,9 +88,8 @@ const leaveGame = async (user_id, room_id) => {
       `delete from usergames where usergames.user_id = ${user_id} and usergames.game_id = ${room_id}`,
       { type: db.sequelize.QueryTypes.DELETE }
     );
-
-      socket.emit(`${room_id}`, "someone joined", "message");
-      return true;
+    socket.emit(`${room_id}`, "someone joined", "message");
+    return true;
   } catch (err) {
     return new Error("Error in deleting user from game");
   }
