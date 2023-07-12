@@ -12,7 +12,7 @@ function useLogin(loginStatus, setLoginStatus  ,navigate,loading, setLoading ,us
     setLoading(true);
     try{
         const response = await axios.post("/auth/signin", user);
-        console.log(response.data.response.token);
+        // console.log(response.data.response.token);
         loginMessage.innerHTML = "Login Successful";
         navigate("/home");
         localStorage.setItem("token", response.data.response.token);

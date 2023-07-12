@@ -7,6 +7,7 @@ import Register from "./components/Register/Register";
 import TabsRender from "./Component/Tabs";
 import { useContext, useState } from "react";
 import { UserContext } from "./contexts/UserContext.js";
+import Waiting from "./Component/Waiting";
 
 function App() {
   let [userState, setUserState] = useState({});
@@ -20,10 +21,11 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/home" element={<TabsRender />} />
             <Route path="/" element={<Login />} />
-    
+            <Route path="/waiting/:game_id" element={<Waiting />} />
           </Routes>
         </Router>
       </UserContext.Provider>
+
     </div>
   );
 }

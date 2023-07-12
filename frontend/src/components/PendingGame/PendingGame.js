@@ -1,9 +1,25 @@
 import './styles.css'
+import { useNavigate } from "react-router-dom";
+import axios from "../../APIS/axios.js"
 
 function PendingGame(props){
     let game = props.game;
-    function join(){
+    let navigate = useNavigate();
 
+    async function join(){
+        console.log("Joining game");
+        try{
+            const token = localStorage.getItem("token");
+            axios.defaults.headers["cookies"] = `${token}`;
+
+            const response = await axios.post("/game/join", {game_id: game.game_id});
+            console.log(response);
+            navigate(`/waiting/${game.game_id}`);
+        }catch(err){
+            console.log(err);
+        }
+
+        
     }
     return(
         <tr className="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
@@ -12,7 +28,7 @@ function PendingGame(props){
             {game.game_id}
         </th>
         <td className="px-6 py-4">
-            {game.created_by}
+            {game.username}
         </td>
         <td className="px-6 py-4">
             {game.game_cap}

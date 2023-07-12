@@ -18,11 +18,12 @@ const signup = async (user) => {
     user.password = await bcrypt.hash(user.password, salt);
 
     const created = await Users.create(user);
-
-    return user.user_id;
+    const ret = {}
+    ret.username = user.username;
+    ret.user_id = user.user_id;
+    return ret;
   } catch (err) {
-    console.log("err");
-    return err;
+    return "Error, username already exists";
   }
 };
 

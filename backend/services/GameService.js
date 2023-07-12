@@ -1,6 +1,7 @@
 const { UserGame } = require("../models");
 const { Game } = require("../models");
-
+const db = require("../models");
+const socket = require('./socket')
 
 const create = async(game) => {
 
@@ -52,6 +53,7 @@ const join = async (game_id, user_id) => {
         user_id,
         position: initial_position,
       });
+      socket.emit(`${game_id}`, "someone joined", "message");
       msg = "the player joined the game";
     } else if (status === "start") {
       const createUserGame = await UserGame.create({
@@ -59,6 +61,7 @@ const join = async (game_id, user_id) => {
         user_id,
         position: initial_position,
       });
+      socket.emit(`${game_id}`, "someone joined", "message");
       await startGame({ game_id, user_id, colors });
       msg = "start the game";
     } else if (status === "full") {
@@ -100,6 +103,24 @@ const startGame = async ({ game_id, user_id, colors }) => {
   return;
 };
 
+const getPlayers = async(game_id) => {
+  let users = await db.sequelize.query(
+    `SELECT u.username FROM users as u, UserGames as g WHERE g.game_id = ${game_id} AND g.user_id = u.user_id`,
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
+  return users;
+}
+
+const getAll = async() => {
+  let games = await db.sequelize.query(
+    `SELECT u.username, g.game_cap, g.game_id FROM users as u, games as g WHERE u.user_id = g.created_by`,
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
+  return games;
+}
+
 module.exports.join = join;
-module.exports.create = create
+module.exports.create = create;
+module.exports.getPlayers = getPlayers;
+module.exports.getAll = getAll;
 
