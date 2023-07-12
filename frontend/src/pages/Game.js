@@ -33,10 +33,10 @@ const Game = () => {
   usePlay(moved, id, setPlay, setMoved, positions, setPositions, setDiceValue);
   console.log(positions);
 
-  useEffect(() => {});
   useEffect(() => {
     setPositions(board?.positions);
   }, [board]);
+
   if (board) {
     // setPositions(board.positions);
     return (

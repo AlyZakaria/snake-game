@@ -1,18 +1,24 @@
 'use strict';
 
+const { sequelize } = require('../models');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
+    const g = {board_id: 1, style: 'get_image/:1'}
+  
+
+    await queryInterface.insert(null, 'boards', g);
     const boardElementsData = [
-      [1, 1, 38, 'l', 1],
-      [2, 4, 14, 'l', 1],
-      [3, 8, 10, 'l', 1],
-      [4, 21, 42, 'l', 1],
-      [5, 28, 76, 'l', 1],
-      [6, 36, 6, 's', 1],
-      [7, 32, 10, 's', 1],
-      [8, 48, 26, 's', 1],
-      [9, 50, 67, 'l', 1],
+      [1, 1, 38, 'l',   1],
+      [2, 4, 14, 'l',   1],
+      [3, 8, 10, 'l',   1],
+      [4, 21, 42, 'l',  1],
+      [5, 28, 76, 'l',  1],
+      [6, 36, 6, 's',   1],
+      [7, 32, 10, 's',  1],
+      [8, 48, 26, 's',  1],
+      [9, 50, 67, 'l',  1],
       [10, 63, 18, 's', 1],
       [11, 71, 92, 'l', 1],
       [12, 80, 99, 'l', 1],

@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
-
+const checkPlayer = require('../interceptors/PlayCheck')
 const {play,leaveGame, getPosition, get_url} = require('../services/UserGameService');
 
-router.post('/play', async (req, res) => {
+router.post('/play', checkPlayer, async (req, res) => {
     try{
         let result = await play(req.body.room_id);
         console.log(result);

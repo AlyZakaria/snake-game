@@ -1,9 +1,8 @@
 const { userGame, Game } = require("../models");
 
-const socket = require('./socket')
-const timeChekcer = require('../public/TimeChecker')
+const socket = require("./socket");
+const timeChekcer = require("../public/TimeChecker");
 const db = require("../models");
-
 
 const play = async (room_id) => {
   try {
@@ -25,16 +24,18 @@ const play = async (room_id) => {
       Number(result[0].position) + diceVal > 100
         ? Number(result[0].position)
         : Number(result[0].position) + diceVal;
-    
+
     let newPos = newPosition;
-    console.log(result)
-    let special_element = false
-    let element = await db.sequelize.query(`SELECT e.from, e.to FROM board_elements as e where board_id = ${result[0].board_id}`);
-    for (let i=0; i<element[0].length; i++){
-      if (element[0][i].from === newPosition){
-        newPosition = element[0][i].to
-        special_element = true
-        break
+    console.log(result);
+    let special_element = false;
+    let element = await db.sequelize.query(
+      `SELECT e.from, e.to FROM board_elements as e where board_id = ${result[0].board_id}`
+    );
+    for (let i = 0; i < element[0].length; i++) {
+      if (element[0][i].from === newPosition) {
+        newPosition = element[0][i].to;
+        special_element = true;
+        break;
       }
     }
     // before update position, check if there is any user at the new position
@@ -65,12 +66,16 @@ const play = async (room_id) => {
 
     let newCurrentUser = result2[0].current_user;
     // update position
-    socket.emit(`${room_id}`, {diceVal, newPosition, newCurrentUser}, "message")
+    socket.emit(
+      `${room_id}`,
+      { diceVal, newPosition, newCurrentUser },
+      "message"
+    );
     await Game.update(
-      {last_play: new Date()},
-      {where: {game_id: room_id}}
-    )
-    timeChekcer(room_id, play)
+      { last_play: new Date() },
+      { where: { game_id: room_id } }
+    );
+    timeChekcer(room_id, play);
     return { diceVal, newPosition, newCurrentUser };
   } catch (err) {
     return err;
@@ -83,11 +88,10 @@ const leaveGame = async (user_id, room_id) => {
       `delete from usergames where usergames.user_id = ${user_id} and usergames.game_id = ${room_id}`,
       { type: db.sequelize.QueryTypes.DELETE }
     );
-    console.log(result);
-    if (result) return true;
-    else throw new Error("Error in deleting user from game");
+    socket.emit(`${room_id}`, "someone joined", "message");
+    return true;
   } catch (err) {
-    return err;
+    return new Error("Error in deleting user from game");
   }
 };
 
@@ -120,14 +124,19 @@ const EmptyIndex = async (position, room_id) => {
 };
 
 const get_url = async (room_id) => {
-  const board_id = await db.sequelize.query(`select board_id from games where game_id = ${room_id}`, {type: db.sequelize.QueryTypes.SELECT})
-  console.log(board_id[0].board_id)
-  return db.sequelize.query(`select boards.style from boards where boards.board_id = ${board_id[0].board_id}`)
-}
+  const board_id = await db.sequelize.query(
+    `select board_id from games where game_id = ${room_id}`,
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
+  console.log(board_id[0].board_id);
+  return db.sequelize.query(
+    `select boards.style from boards where boards.board_id = ${board_id[0].board_id}`
+  );
+};
 
 module.exports = {
   play,
   leaveGame,
   getPosition,
-  get_url
+  get_url,
 };

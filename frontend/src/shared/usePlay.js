@@ -33,7 +33,7 @@ function usePlay(
 
       const newPositions = positions.map((position) => {
         if (position.user_id === response.data.newCurrentUser) {
-          position.position = response.data.newPosition;
+          position.position = response.data.newPosition.toString();
         }
         return position;
       });
@@ -42,9 +42,10 @@ function usePlay(
       setDiceValue(response.data.diceVal);
 
       setPlay(response.data);
-      setMoved(true);
     } catch (err) {
       console.log(err);
+    } finally {
+      setMoved(true);
     }
   };
 
