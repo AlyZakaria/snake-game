@@ -56,3 +56,9 @@ button{
     text-align: center;
     margin-top: 15px !important;
 }
+.loginBack,
+.registerBack{
+    background-color: green !important;
+    height: 100vh;
+
+}

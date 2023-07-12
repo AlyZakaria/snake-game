@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { socket } from "../socket.js";
 import axios from "../APIS/axios.js";
 
 function usePlay(
@@ -53,6 +54,20 @@ function usePlay(
   //   setMoved(false);
   //   console.log(play);
   // };
+
+  socket.on(`${room_id}`, async (msg) => {
+    console.log("here");
+    if (msg === "game ended") {
+    } else {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      axios.defaults.headers["cookies"] = `${token}`;
+
+      const response = await axios.post("usergame/play", { room_id });
+      console.log(response);
+      // setUsers(response.data);
+    }
+  });
 
   useEffect(() => {
     if (!moved)

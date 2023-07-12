@@ -1,39 +1,60 @@
-import React, { Component } from 'react';
-// import {
-//     MDBContainer,
-//     MDBInput,
-//     MDBBtn,
-// } from 'mdb-react-ui-kit';
+import React from 'react';
+// import logo from '../images/logo.png'
 
-class Hosting extends Component {
-    render() {
-        return (
-            <div class="w-full max-w-xs">
-                <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-                    <div class="mb-4">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                            Username
-                        </label>
-                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="Username" />
-                    </div>
-                    <div class="mb-6">
-                        <label class="block text-gray-700 text-sm font-bold mb-2" for="password">
-                            Password
-                        </label>
-                        <input class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="******************" />
-                        <p class="text-red-500 text-xs italic">Please choose a password.</p>
-                    </div>
-                    <div class="flex items-center justify-between">
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-                            Sign In
-                        </button>
-                    </div>
-                </form>
-                <p class="text-center text-gray-500 text-xs">
-                    &copy;2020 Acme Corp. All rights reserved.
-                </p>
-            </div>
-        );
-    }
-}
+const Hosting = () => {
+  return (
+    <>
+    <div className="container">
+    <div className="row d-flex justify-content-center ">
+      <div className="col-3 ">
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 container ">
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="number"
+            >
+              Number of Players
+            </label>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="number"
+              type="number"
+              placeholder="2-10"
+              min="2"
+              max="10"
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              className="block text-gray-700 text-sm font-bold mb-2"
+              htmlFor="countries"
+            >
+              Board types
+            </label>
+            <select
+              id="countries"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+            >
+              <option selected>Choose a board type</option>
+              <option value="US">Type 1</option>
+              <option value="CA">Type 2</option>
+            </select>
+          </div>
+
+          <div className="flex items-center justify-between">
+            <button
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="button"
+            >
+              Create Room
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    </div>
+    </>
+  );
+};
+
 export default Hosting;
