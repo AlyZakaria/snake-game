@@ -38,6 +38,7 @@ const play = async (room_id) => {
         break;
       }
     }
+    
     // before update position, check if there is any user at the new position
     let noUser = await EmptyIndex(newPosition, room_id);
     if (!noUser) {
@@ -66,16 +67,27 @@ const play = async (room_id) => {
 
     let newCurrentUser = result2[0].current_user;
     // update position
-    socket.emit(
-      `${room_id}`,
-      { diceVal, newPosition, newCurrentUser },
-      "message"
-    );
     await Game.update(
       { last_play: new Date() },
       { where: { game_id: room_id } }
     );
-    timeChekcer(room_id, play);
+    if (newPosition === 100){
+      socket.emit(`${room_id}`, 'game ended', 'message');
+      await Game.UPDATE(
+        {status: 'done'},
+        {where: {game_cap: room_id}}
+      );
+    }
+    else{
+      socket.emit(
+        `${room_id}`,
+        { diceVal, newPosition, newCurrentUser },
+        "message"
+      );
+      timeChekcer(room_id, play);
+    }
+    
+    
     return { diceVal, newPosition, newCurrentUser };
   } catch (err) {
     return err;
@@ -88,9 +100,8 @@ const leaveGame = async (user_id, room_id) => {
       `delete from usergames where usergames.user_id = ${user_id} and usergames.game_id = ${room_id}`,
       { type: db.sequelize.QueryTypes.DELETE }
     );
-
-      socket.emit(`${room_id}`, "someone joined", "message");
-      return true;
+    socket.emit(`${room_id}`, "someone joined", "message");
+    return true;
   } catch (err) {
     return new Error("Error in deleting user from game");
   }

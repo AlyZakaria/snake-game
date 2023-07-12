@@ -61,8 +61,8 @@ const join = async (game_id, user_id) => {
         user_id,
         position: initial_position,
       });
-      socket.emit(`${game_id}`, "someone joined", "message");
       await startGame({ game_id, user_id, colors });
+      socket.emit(`${game_id}`, "start", "message");
       msg = "start the game";
     } else if (status === "full") {
       msg = "the game is full the player  cannot join";
@@ -119,8 +119,16 @@ const getAll = async() => {
   return games;
 }
 
+const getOrder = async (game_id) => {
+  let order = await db.sequelize.query(
+    `SELECT games.current_user FROM games WHERE games.game_id = ${game_id}`,
+    { type: db.sequelize.QueryTypes.SELECT }
+  );
+  return order;
+}
+
 module.exports.join = join;
 module.exports.create = create;
 module.exports.getPlayers = getPlayers;
 module.exports.getAll = getAll;
-
+module.exports.getOrder = getOrder;
