@@ -8,8 +8,10 @@ const Dice = ({ diceValue, onDiceRoll }) => {
     if (!rolling) {
       setRolling(true);
       setTimeout(() => {
-        const newValue = Math.floor(Math.random() * 6) + 1;
-        onDiceRoll(newValue);
+        // const newValue = Math.floor(Math.random() * 6) + 1;
+        // onDiceRoll(newValue);
+        onDiceRoll();
+
         setRolling(false);
       }, 1000);
     }

@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.ENUM('pending', 'running', 'done'),
             allowNull: false,
             defaultValue: 'pending',
+        },
+        last_play: {
+           type: DataTypes.DATE
         }
     }, {
         id: false,

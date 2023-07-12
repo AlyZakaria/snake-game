@@ -10,7 +10,7 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route index path="/game" element={<Game />} />
+        <Route index path="/game/:id" element={<Game />} />
       </Routes>
     </BrowserRouter>
   );
