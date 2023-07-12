@@ -13,8 +13,9 @@ export default function Waiting() {
     let [leaveStatus, setLeaveStatus] = useState(false);
     let navigate = useNavigate();
     let game_id = useParams().game_id;  
-    console.log(game_id);
-    useJoinUsers(game_id, setUsers);
+    // console.log(game_id);
+
+    useJoinUsers(game_id, setUsers, navigate);
 
     useLeave(leaveStatus, game_id,navigate);
 

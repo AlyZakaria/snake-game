@@ -8,6 +8,7 @@ import TabsRender from "./Component/Tabs";
 import { useContext, useState } from "react";
 import { UserContext } from "./contexts/UserContext.js";
 import Waiting from "./Component/Waiting";
+import RunningGame from "./components/RunningGame/RunningGame"
 
 function App() {
   let [userState, setUserState] = useState({});
@@ -22,6 +23,7 @@ function App() {
             <Route path="/home" element={<TabsRender />} />
             <Route path="/" element={<Login />} />
             <Route path="/waiting/:game_id" element={<Waiting />} />
+            <Route path="/running/:game_id" element={<RunningGame />} />
           </Routes>
         </Router>
       </UserContext.Provider>

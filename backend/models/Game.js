@@ -3,7 +3,7 @@ module.exports = (sequelize, DataTypes) => {
 
         game_id: {
             type: DataTypes.INTEGER ,
-            allowNull: false,
+            // allowNull: false,
             primaryKey: true,
             autoIncrement: true
         },
