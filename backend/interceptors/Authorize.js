@@ -11,6 +11,7 @@ const checkUser = (req, res, next) => {
         res.status(401).json("please log in")
       } else {
         res.locals.id = decodedToken.id
+        console.log(decodedToken)
         next();
       }
     });

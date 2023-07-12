@@ -9,6 +9,7 @@ const {getPlayers, create, join, getAll} = require('../services/GameService')
 
 router.post('/create', async(req, res) => {
     const id = res.locals.id
+    console.log(id)
     console.log(`id = ${id}`)
     let game = req.body
     game.created_by = id

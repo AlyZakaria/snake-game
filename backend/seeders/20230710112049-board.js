@@ -5,7 +5,7 @@ const { sequelize } = require('../models');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    const g = {board_id: 1, style: 'get_image/:1'}
+    const g = {board_id: 1, style: 'get_image/1'}
   
 
     await queryInterface.insert(null, 'boards', g);

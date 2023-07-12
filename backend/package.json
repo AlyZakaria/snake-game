@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npx sequelize-cli db:create && npx sequelize db:migrate && npx sequelize db:seed:all && nodemon index.js"
+    "start": "nodemon index.js",
+    "migrate_seed": "npx sequelize-cli db:create && npx sequelize db:migrate && npx sequelize db:seed:all"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +20,7 @@
     "nodemon": "^2.0.22",
     "sequelize": "^6.32.1",
     "sequelize-cli": "^6.6.1",
-    "socket.io": "^4.7.1"
+    "socket.io": "^4.7.1",
+    "socket.io-client": "^4.7.1"
   }
 }
