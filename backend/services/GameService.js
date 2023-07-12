@@ -61,8 +61,8 @@ const join = async (game_id, user_id) => {
         user_id,
         position: initial_position,
       });
-      socket.emit(`${game_id}`, "start", "message");
       await startGame({ game_id, user_id, colors });
+      socket.emit(`${game_id}`, "start", "message");
       msg = "start the game";
     } else if (status === "full") {
       msg = "the game is full the player  cannot join";
