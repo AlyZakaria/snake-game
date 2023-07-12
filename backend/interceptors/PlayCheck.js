@@ -11,7 +11,7 @@ const checkPlayer = async (req, res, next) => {
       } else {
         const id = decodedToken.id;
         const current_user = await getOrder(req.body.room_id);
-        if (id === current_user){
+        if (id === current_user[0].current_user){
             next();
         }
         else{
