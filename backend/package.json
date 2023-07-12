@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js",
-    "seed": "npx sequelize-cli db:seed:all"
+    "start": "npx sequelize-cli db:create && npx sequelize db:migrate && npx sequelize db:seed:all && nodemon index.js"
   },
   "author": "",
   "license": "ISC",
