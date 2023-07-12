@@ -7,12 +7,17 @@ function useJoinUsers(game_id, setUsers, navigate){
 
     useEffect(() => {
         const getPlayers = async () => {
+            try{
             const token = localStorage.getItem("token");
             axios.defaults.headers["cookies"] = `${token}`;
             
             const response = await axios.post(`/game/getPlayers`, {game_id: game_id});
             // console.log(response.data);
             setUsers(response.data);
+            }catch(err){
+                navigate("/login");
+                return;
+            }
         }
         getPlayers();
     }, []);
