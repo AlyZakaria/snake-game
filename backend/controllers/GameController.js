@@ -46,7 +46,7 @@ router.get('/getAll', async(req, res) => {
 
 router.post('/getPlayers', async(req, res) => {
   const game_id = req.body.game_id;
-  try{x
+  try{
     const users = await getPlayers(game_id);
     res.status(200).json(users)
   }
