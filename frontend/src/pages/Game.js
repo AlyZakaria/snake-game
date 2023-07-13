@@ -64,7 +64,7 @@ const Game = () => {
             })}
           </div>
         )}
-        <div className="flex justify-center mt-36 gap-2">
+        <div className="flex justify-center mt-6 mb-4 gap-2">
           <div className="flex flex-col gap-1 w-auto">
             {players?.map((player) => {
               return (
@@ -82,7 +82,7 @@ const Game = () => {
               );
             })}
           </div>
-          <div className="w-1/2">
+          <div className="w-[90vh]">
             {board ? (
               <Board
                 imageUrl={board.url.style}

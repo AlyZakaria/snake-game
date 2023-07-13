@@ -91,7 +91,8 @@ function usePlay(
         );
         setPositions(response.data);
         setDiceValue(msg.diceVal);
-        setPlayers(msg.userInfo);
+        // the users info has all the players in all games
+        // setPlayers(msg.userInfo);
         console.log(msg.newCurrentUser);
         setCurrentPlayer(msg.newCurrentUser);
 

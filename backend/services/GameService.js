@@ -108,6 +108,8 @@ const getPlayers = async (game_id) => {
     `SELECT u.username, g.user_id, g.color FROM users as u, UserGames as g WHERE g.game_id = ${game_id} AND g.user_id = u.user_id`,
     { type: db.sequelize.QueryTypes.SELECT }
   );
+  console.log("users:", users);
+
   return users;
 };
 
