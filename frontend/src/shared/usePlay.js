@@ -81,23 +81,22 @@ function usePlay(
       // console.log("here");
       if (msg === "game ended") {
         setFinished(true);
-      } else {
-        const token = localStorage.getItem("token");
-        console.log(token);
-        axios.defaults.headers["cookies"] = `${token}`;
-
-        const response = await axios.get(
-          `usergame/positions?room_id=${room_id}`
-        );
-        setPositions(response.data);
-        setDiceValue(msg.diceVal);
-        // the users info has all the players in all games
-        // setPlayers(msg.userInfo);
-        console.log(msg.newCurrentUser);
-        setCurrentPlayer(msg.newCurrentUser);
-
-        console.log(response);
       }
+      // else {
+      const token = localStorage.getItem("token");
+      console.log(token);
+      axios.defaults.headers["cookies"] = `${token}`;
+
+      const response = await axios.get(`usergame/positions?room_id=${room_id}`);
+      setPositions(response.data);
+      setDiceValue(msg.diceVal);
+      // the users info has all the players in all games
+      // setPlayers(msg.userInfo);
+      console.log(msg.newCurrentUser);
+      setCurrentPlayer(msg.newCurrentUser);
+
+      console.log(response);
+      // }
     });
   }, []);
 }
