@@ -6,6 +6,7 @@ import useGetBoard from "../shared/useGetBoard";
 import { useParams } from "react-router";
 import usePlay from "../shared/usePlay";
 import Player from "../components/Player";
+import Timer from "../components/Timer";
 
 const Game = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ const Game = () => {
   const [players, setPlayers] = useState();
   useGetBoard(id, setBoard, setPlayers);
 
+  const [remainingTime, setRemainingTime] = useState(10);
   const [positions, setPositions] = useState();
   const [finished, setFinished] = useState(false);
   const [play, setPlay] = useState();
@@ -64,12 +66,22 @@ const Game = () => {
             })}
           </div>
         )}
+        <div>
+          {" "}
+          <Timer
+            remainingTime={remainingTime}
+            setRemainingTime={setRemainingTime}
+          />
+        </div>
         <div className="flex justify-center mt-6 mb-4 gap-2">
           <div className="flex flex-col gap-1 w-auto">
             {players?.map((player) => {
               return (
-                // <div className="flex gap-1 w-auto " key={player.user_id}>
-                <div className="flex flex-row gap-1 justify-center items-center">
+                // <div className="flex gap-1 w-auto " >
+                <div
+                  key={player.user_id}
+                  className="flex flex-row gap-1 justify-center items-center"
+                >
                   <span>{player.username}</span>
                   {/* <span> */}{" "}
                   <Player color={player.color} style={{ width: "30%" }} />

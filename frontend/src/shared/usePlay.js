@@ -22,7 +22,8 @@ function usePlay(
     positions,
     setPositions,
     setDiceValue,
-    setCurrentPlayer
+    setCurrentPlayer,
+    setFinished
   ) => {
     try {
       const accessToken = localStorage.getItem("token");
@@ -43,7 +44,9 @@ function usePlay(
         return position;
       });
       console.log(newPositions);
-
+      if (response.data.newPosition.toString() === "100") {
+        setFinished(true);
+      }
       setPositions(newPositions);
       setDiceValue(response.data.diceVal);
       console.log(response.data.newCurrentUser);
@@ -72,7 +75,8 @@ function usePlay(
         positions,
         setPositions,
         setDiceValue,
-        setCurrentPlayer
+        setCurrentPlayer,
+        setFinished
       );
   }, [moved]);
 
