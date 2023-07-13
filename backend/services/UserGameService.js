@@ -1,4 +1,4 @@
-const { userGame, Game, } = require("../models");
+const { userGame, Game } = require("../models");
 
 const socket = require("./socket");
 const timeChekcer = require("../public/TimeChecker");
@@ -38,7 +38,7 @@ const play = async (room_id) => {
         break;
       }
     }
-    
+
     // before update position, check if there is any user at the new position
     let noUser = await EmptyIndex(newPosition, room_id);
     if (!noUser) {
@@ -75,15 +75,10 @@ const play = async (room_id) => {
       `select usergames.user_id, usergames.color, users.username from usergames, users where usergames.user_id = users.user_id`,
       { type: db.sequelize.QueryTypes.SELECT }
     );
-    if (newPosition === 100){
-      socket.emit(`${room_id}`, 'game ended', 'message');
-      await Game.UPDATE(
-        {status: 'done'},
-        {where: {game_cap: room_id}}
-      );
-    }
-    else{
-      
+    if (newPosition === 100) {
+      socket.emit(`${room_id}`, "game ended", "message");
+      await Game.UPDATE({ status: "done" }, { where: { game_cap: room_id } });
+    } else {
       socket.emit(
         `${room_id}`,
         { diceVal, newPosition, newCurrentUser, userInfo },
@@ -91,8 +86,7 @@ const play = async (room_id) => {
       );
       timeChekcer(room_id, play);
     }
-    
-    
+
     return { diceVal, newPosition, newCurrentUser, userInfo };
   } catch (err) {
     return err;

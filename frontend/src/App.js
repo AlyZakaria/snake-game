@@ -27,8 +27,7 @@ function App() {
             <Route path="/running/:id" element={<Game />} />
           </Routes>
         </Router>
-      </UserContext.Provider> 
-
+      </UserContext.Provider>
     </div>
   );
 }

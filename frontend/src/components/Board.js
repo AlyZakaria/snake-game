@@ -23,7 +23,11 @@ function Board({ imageUrl, positions, colors }) {
           >
             {positions?.map((position) => {
               return position.position === gridToBoardIndex[index + 1] ? (
-                <Player key={position.user_id} color={position.color} />
+                <Player
+                  key={position.user_id}
+                  color={position.color}
+                  style={{ height: "100%", position: "absolute" }}
+                />
               ) : (
                 ""
               );

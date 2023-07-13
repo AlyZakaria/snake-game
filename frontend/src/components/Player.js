@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-const Player = ({ color, left, bottom }) => {
+const Player = ({ color, style }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -31,12 +31,13 @@ const Player = ({ color, left, bottom }) => {
     context.fill();
   }, []);
 
-  const canvasStyles = {
-    position: "absolute",
-    width: "6rem",
-  };
+  // const canvasStyles = {
+  //   position: "absolute",
+  //   // width: "6rem",
+  //   height: height,
+  // };
 
-  return <canvas ref={canvasRef} style={canvasStyles} />;
+  return <canvas ref={canvasRef} style={style} />;
 };
 
 export default Player;

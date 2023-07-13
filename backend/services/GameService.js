@@ -1,27 +1,24 @@
 const { UserGame } = require("../models");
 const { Game } = require("../models");
 const db = require("../models");
-const socket = require('./socket')
+const socket = require("./socket");
 
-const create = async(game) => {
-
-    try{
-        const created = await Game.create(game);   
-        const userGame = {};
-        userGame.user_id = game.created_by
-        userGame.game_id = created.game_id
-        userGame.position = 0
-        userGame.order = 1
-        userGame.color = 'red'
-        const addUserGame = await UserGame.create(userGame);
-        return created;
-    }
-    catch(err){
-        console.log(err)
-        return "err";
-    }
-
-}
+const create = async (game) => {
+  try {
+    const created = await Game.create(game);
+    const userGame = {};
+    userGame.user_id = game.created_by;
+    userGame.game_id = created.game_id;
+    userGame.position = 0;
+    userGame.order = 1;
+    userGame.color = "red";
+    const addUserGame = await UserGame.create(userGame);
+    return created;
+  } catch (err) {
+    console.log(err);
+    return "err";
+  }
+};
 
 const join = async (game_id, user_id) => {
   try {
@@ -98,26 +95,29 @@ const startGame = async ({ game_id, user_id, colors }) => {
       { where: { user_id: users[i].user_id } }
     );
   }
-  await Game.update({ status: "running", last_play: new Date() }, { where: { game_id } });
-  
+  await Game.update(
+    { status: "running", last_play: new Date() },
+    { where: { game_id } }
+  );
+
   return;
 };
 
-const getPlayers = async(game_id) => {
+const getPlayers = async (game_id) => {
   let users = await db.sequelize.query(
-    `SELECT u.username FROM users as u, UserGames as g WHERE g.game_id = ${game_id} AND g.user_id = u.user_id`,
+    `SELECT u.username, g.user_id, g.color FROM users as u, UserGames as g WHERE g.game_id = ${game_id} AND g.user_id = u.user_id`,
     { type: db.sequelize.QueryTypes.SELECT }
   );
   return users;
-}
+};
 
-const getAll = async() => {
+const getAll = async () => {
   let games = await db.sequelize.query(
     `SELECT u.username, g.game_cap, g.game_id FROM users as u, games as g WHERE u.user_id = g.created_by`,
     { type: db.sequelize.QueryTypes.SELECT }
   );
   return games;
-}
+};
 
 const getOrder = async (game_id) => {
   let order = await db.sequelize.query(
@@ -125,7 +125,7 @@ const getOrder = async (game_id) => {
     { type: db.sequelize.QueryTypes.SELECT }
   );
   return order;
-}
+};
 
 module.exports.join = join;
 module.exports.create = create;

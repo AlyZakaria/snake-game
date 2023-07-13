@@ -9,7 +9,10 @@ function usePlay(
   setMoved,
   positions,
   setPositions,
-  setDiceValue
+  setDiceValue,
+  setPlayers,
+  setCurrentPlayer,
+  setFinished
 ) {
   const play = async (
     moved,
@@ -18,7 +21,8 @@ function usePlay(
     setMoved,
     positions,
     setPositions,
-    setDiceValue
+    setDiceValue,
+    setCurrentPlayer
   ) => {
     try {
       const accessToken = localStorage.getItem("token");
@@ -42,6 +46,8 @@ function usePlay(
 
       setPositions(newPositions);
       setDiceValue(response.data.diceVal);
+      console.log(response.data.newCurrentUser);
+      setCurrentPlayer(response.data.newCurrentUser);
 
       setPlay(response.data);
     } catch (err) {
@@ -56,8 +62,6 @@ function usePlay(
   //   console.log(play);
   // };
 
-
-
   useEffect(() => {
     if (!moved)
       play(
@@ -67,26 +71,34 @@ function usePlay(
         setMoved,
         positions,
         setPositions,
-        setDiceValue
+        setDiceValue,
+        setCurrentPlayer
       );
   }, [moved]);
 
-  useEffect(()=>{
-
+  useEffect(() => {
     socket.on(`${room_id}`, async (msg) => {
-      console.log("here");
+      // console.log("here");
       if (msg === "game ended") {
-      } else if (msg === 'played') {
+        setFinished(true);
+      } else {
         const token = localStorage.getItem("token");
         console.log(token);
         axios.defaults.headers["cookies"] = `${token}`;
-  
-        const response = await axios.get(`usergame/positions?room_id=${room_id}`);
+
+        const response = await axios.get(
+          `usergame/positions?room_id=${room_id}`
+        );
         setPositions(response.data);
+        setDiceValue(msg.diceVal);
+        setPlayers(msg.userInfo);
+        console.log(msg.newCurrentUser);
+        setCurrentPlayer(msg.newCurrentUser);
+
         console.log(response);
       }
     });
-  },[])
+  }, []);
 }
 
 export default usePlay;
