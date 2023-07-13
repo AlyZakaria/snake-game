@@ -12,6 +12,12 @@ function useJoinUsers(game_id, setUsers, navigate){
             axios.defaults.headers["cookies"] = `${token}`;
             
             const response = await axios.post(`/game/getPlayers`, {game_id: game_id});
+            console.log(response)
+            if (response.data.msg === 'start the game'){
+                console.log("starting");
+                navigate(`/running/${game_id}`)
+                return;
+            }
             // console.log(response.data);
             setUsers(response.data);
             }catch(err){

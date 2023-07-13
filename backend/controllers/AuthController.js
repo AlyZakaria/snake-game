@@ -10,8 +10,7 @@ router.post("/signup", async (req, res) => {
     res.status(406).json({error: response});
   }
   else{
-    const token = createToken(response.user_id);
-    res.json({token: token, username: response.username});
+    res.json({token: response.token, username: response.username});
   }
 });
 

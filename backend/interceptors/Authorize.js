@@ -4,6 +4,7 @@ const {Users} = require('../models')
 
 
 const checkUser = (req, res, next) => {
+  console.log(req.originalUrl);
   const token = req.headers.cookies;
   if (token) {
     jwt.verify(token, 'somesecret', async (err, decodedToken) => {

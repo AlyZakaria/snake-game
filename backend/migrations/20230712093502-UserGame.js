@@ -13,7 +13,6 @@ module.exports = {
       },
       game_id: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         primaryKey: true,
       },
       position: {

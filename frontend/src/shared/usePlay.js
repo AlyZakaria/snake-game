@@ -39,6 +39,7 @@ function usePlay(
         return position;
       });
       console.log(newPositions);
+
       setPositions(newPositions);
       setDiceValue(response.data.diceVal);
 
@@ -70,20 +71,22 @@ function usePlay(
       );
   }, [moved]);
 
-  socket.on(`${room_id}`, async (msg) => {
-    console.log("here");
-    if (msg === "game ended") {
-    } else {
-      const token = localStorage.getItem("token");
-      console.log(token);
-      axios.defaults.headers["cookies"] = `${token}`;
+  useEffect(()=>{
 
-      const response = await axios.get(`usergame/positions?room_id=${room_id}`);
-      setPositions(response.data);
-      console.log(response);
-      // setUsers(response.data);
-    }
-  });
+    socket.on(`${room_id}`, async (msg) => {
+      console.log("here");
+      if (msg === "game ended") {
+      } else if (msg === 'played') {
+        const token = localStorage.getItem("token");
+        console.log(token);
+        axios.defaults.headers["cookies"] = `${token}`;
+  
+        const response = await axios.get(`usergame/positions?room_id=${room_id}`);
+        setPositions(response.data);
+        console.log(response);
+      }
+    });
+  },[])
 }
 
 export default usePlay;

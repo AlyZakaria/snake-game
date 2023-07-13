@@ -13,6 +13,11 @@ function PendingGame(props){
             axios.defaults.headers["cookies"] = `${token}`;
 
             const response = await axios.post("/game/join", {game_id: game.game_id});
+            if (response.data.msg === 'start the game'){
+                console.log("starting");
+                navigate(`/running/${game.game_id}`)
+                return;
+            }
             console.log(response);
             navigate(`/waiting/${game.game_id}`);
         }catch(err){
